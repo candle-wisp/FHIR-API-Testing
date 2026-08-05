@@ -1,0 +1,55 @@
+$kind: http-request
+name: Patient IDs
+url: "{{base_url}}/Patient/{{patient_id}}"
+method: GET
+scripts:
+  - type: beforeRequest
+    code: ""
+    language: text/javascript
+  - type: afterResponse
+    code: "pm.test(\"Response is JSON\", function () {\r
+
+      \    pm.response.to.be.json;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response is a Patient resource\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.resourceType).to.eql(\"Patient\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Patient has an ID\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.id).to.exist;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Returned patient matches requested patient\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.id)\r
+
+      \        .to.eql(pm.collectionVariables.get(\"patient_id\"));\r
+
+      });"
+    language: text/javascript
+settings: {}
+order: 3000

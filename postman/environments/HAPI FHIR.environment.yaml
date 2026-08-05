@@ -1,0 +1,5 @@
+name: HAPI FHIR
+values:
+  - key: base_url
+    value: 'https://hapi.fhir.org/baseR4'
+color: 180

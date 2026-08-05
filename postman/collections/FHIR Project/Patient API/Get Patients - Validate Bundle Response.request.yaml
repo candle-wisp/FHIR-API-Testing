@@ -1,0 +1,61 @@
+$kind: http-request
+name: Get Patients - Validate Bundle Response
+description: Retrieves a list of all Patient Resources from the FHIR server and validates the response.
+url: "{{base_url}}/Patient"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Response is a FHIR Bundle\", function () {\r
+
+      \    let jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.resourceType).to.eql(\"Bundle\");\r
+
+      });\r
+
+      pm.test(\"Response is JSON\", function () {\r
+
+      \    pm.response.to.be.json;\r
+
+      });\r
+
+      pm.test(\"Response is FHIR Bundle\" , function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.resourceType).to.eql(\"Bundle\");\r
+
+      \    });\r
+
+      pm.test(\"Bundle returns entries\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.entry.length).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      const jsonData = pm.response.json();\r
+
+      \r
+
+      const patientId = jsonData.entry[0].resource.id;\r
+
+      \r
+
+      pm.collectionVariables.set(\"patient_id\", patientId);\r
+
+      \r
+
+      console.log(\"Saved patient_id\", patientId)\r
+
+      \r
+
+      console.log(\"patient_id:\", patientId);\r
+
+      console.log(\"collection variable:\", pm.collectionVariables.get(\"patient_id\"));"
+    language: text/javascript
+settings: {}
+order: 1000

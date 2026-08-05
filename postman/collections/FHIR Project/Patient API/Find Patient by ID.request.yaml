@@ -1,0 +1,50 @@
+$kind: http-request
+name: Find Patient by ID
+url: "{{base_url}}/Patient/{{patient_id}}"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Check if response status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response is a Patient resource\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.resourceType).to.eql(\"Patient\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Patient has an ID\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.id).to.exist;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Patient contains a name field\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.name).to.exist;\r
+
+      });"
+    language: text/javascript
+settings: {}
+order: 4000

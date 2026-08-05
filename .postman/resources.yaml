@@ -1,0 +1,9 @@
+workspace:
+  id: 09d64dd5-402c-4129-8167-753d0ddaaf0e
+cloudResources:
+  collections:
+    ../postman/collections/FHIR Project: 56943014-059a413b-e6c5-434a-bb3a-d4da9d3344c7
+    ../postman/collections/My Collection: 56943014-89a2a2ad-2513-449a-a1c0-e3f123d13614
+  environments:
+    ../postman/environments/HAPI FHIR.environment.yaml: 56943014-026c9376-0fd0-45a9-8eb2-327a9f10df8a
+    ../postman/environments/New Environment.environment.yaml: 56943014-958eb09e-b383-4566-bb42-dc65eb61c699

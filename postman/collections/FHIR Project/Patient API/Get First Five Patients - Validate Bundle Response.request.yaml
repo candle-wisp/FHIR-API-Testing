@@ -1,0 +1,50 @@
+$kind: http-request
+name: Get First Five Patients - Validate Bundle Response
+url: "{{base_url}}/Patient?_count=5"
+method: GET
+queryParams:
+  _count: "5"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Response is JSON\", function () {\r
+
+      \    pm.response.to.be.json;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response is a FHIR Bundle\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.resourceType).to.eql(\"Bundle\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Returns five or fewer patients\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.entry.length).to.be.at.most(5);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Bundle contains patients\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.entry.length).to.be.above(0);\r
+
+      });"
+    language: text/javascript
+settings: {}
+order: 2000

@@ -1,0 +1,5 @@
+$kind: collection
+name: FHIR Project
+description: This collection validates FHIR R4 API Interoperability with REST API requests and automated Postman Tests.
+variables:
+  patient_id: ""
