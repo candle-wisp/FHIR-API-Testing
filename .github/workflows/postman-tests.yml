@@ -22,7 +22,6 @@ jobs:
       - name: Install Postman CLI
         run:
           curl -o-  "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-        uses: postmanlabs/postman-cli-action@v1
 
       - name: Run FHIR API tests
         run: |
