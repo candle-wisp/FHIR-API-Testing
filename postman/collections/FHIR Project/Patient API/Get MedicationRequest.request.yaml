@@ -1,0 +1,61 @@
+$kind: http-request
+name: Get MedicationRequest
+url: "{{base_url}}/MedicationRequest?patient={{patient_id}}"
+method: GET
+queryParams:
+  patient: "{{patient_id}}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Response is JSON \", function () {\r
+
+      \    pm.response.to.be.json;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response is an FHIR Bundle\",function(){\r
+
+      \    pm.expect(pm.response.json().resourceType).to.eql(\"Bundle\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"MedicationRequest Bundle structure\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.resourceType).to.eql(\"Bundle\");\r
+
+      \r
+
+      \    if (jsonData.total > 0) {\r
+
+      \        pm.expect(jsonData.entry).to.be.an(\"array\");\r
+
+      \    }\r
+
+      });\r
+
+      \r
+
+      pm.test(\"MedicationRequest integrity check\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    jsonData.entry.forEach(function(entry) {\r
+
+      \        pm.expect(entry.resource.subject.reference)\r
+
+      \            .to.eql(\"Patient/\" + pm.collectionVariables.get(\"patient_id\"));\r
+
+      \    });\r
+
+      });"
+    language: text/javascript
+order: 2773325162030053

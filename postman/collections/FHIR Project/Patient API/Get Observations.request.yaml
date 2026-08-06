@@ -1,0 +1,54 @@
+$kind: http-request
+name: Get Observations
+url: "{{base_url}}/Observation?patient={{patient_id}}"
+method: GET
+queryParams:
+  patient: "{{patient_id}}"
+scripts:
+  - type: beforeRequest
+    code: ""
+    language: text/javascript
+  - type: afterResponse
+    code: "pm.test(\"Response is JSON\",function () {\r
+
+      \    pm.response.to.be.json; \r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response is an FHIR Bundle\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.resourceType).to.eql(\"Bundle\");\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Contains Observations\" , function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.entry.length).to.be.greaterThan(0);\r
+
+      });\r
+
+      pm.test(\"Every Observation belongs to the selected Patient\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    jsonData.entry.forEach(function(entry) {\r
+
+      \        pm.expect(entry.resource.subject.reference)\r
+
+      \            .to.eql(\"Patient/\" + pm.collectionVariables.get(\"patient_id\"));\r
+
+      \    });\r
+
+      });"
+    language: text/javascript
+order: 2213236213549041
