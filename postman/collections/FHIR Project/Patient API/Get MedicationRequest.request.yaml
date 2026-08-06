@@ -48,6 +48,16 @@ scripts:
 
       \r
 
+      \    if (!jsonData.entry) {\r
+
+      \        pm.expect(jsonData.total).to.eql(0);\r
+
+      \        return;\r
+
+      \    }\r
+
+      \r
+
       \    jsonData.entry.forEach(function(entry) {\r
 
       \        pm.expect(entry.resource.subject.reference)\r
