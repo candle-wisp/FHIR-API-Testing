@@ -1,0 +1,34 @@
+$kind: http-request
+name: Invalid Patient ID Returns 404
+url: "{{base_url}}/Patient/fakeID"
+method: GET
+scripts:
+  - type: beforeRequest
+    code: ""
+    language: text/javascript
+  - type: afterResponse
+    code: "pm.test(\"Invalid Patient ID returns 404 error\", function (){\r
+
+      \    pm.response.to.have.status(404);\r
+
+      \r
+
+      });\r
+
+      \r
+
+      pm.test(\"Error response is FHIR OperationOutcome\", function (){\r
+
+      \r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.resourceType)\r
+
+      \        .to.eql(\"OperationOutcome\");\r
+
+      \        });"
+    language: text/javascript
+order: 1786044302798

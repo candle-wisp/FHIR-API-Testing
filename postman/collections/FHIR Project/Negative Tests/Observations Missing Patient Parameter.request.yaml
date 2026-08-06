@@ -1,0 +1,27 @@
+$kind: http-request
+name: Observations Missing Patient Parameter
+url: "{{base_url}}/Observation"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Observation search without patient returns valid response\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response remains a valid FHIR Bundle\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.resourceType)\r
+
+      \        .to.eql(\"Bundle\");\r
+
+      });"
+    language: text/javascript
+order: 2386905730171013

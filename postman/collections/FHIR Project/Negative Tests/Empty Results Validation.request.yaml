@@ -1,0 +1,35 @@
+$kind: http-request
+name: Empty Results Validation
+url: "{{base_url}}/MedicationRequest?patient=sindhu-syn-000002"
+method: GET
+queryParams:
+  patient: sindhu-syn-000002
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Response is successful\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"MedicationRequest search returns empty Bundle\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.resourceType)\r
+
+      \        .to.eql(\"Bundle\");\r
+
+      \r
+
+      \    pm.expect(jsonData.total)\r
+
+      \        .to.eql(0);\r
+
+      });"
+    language: text/javascript
+order: 3412711513994229
