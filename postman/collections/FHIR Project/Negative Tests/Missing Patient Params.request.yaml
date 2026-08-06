@@ -1,5 +1,4 @@
 $kind: http-request
-name: Observations Missing Patient Parameter
 url: "{{base_url}}/Observation"
 method: GET
 scripts:

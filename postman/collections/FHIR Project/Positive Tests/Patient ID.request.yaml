@@ -1,12 +1,14 @@
 $kind: http-request
-name: Find Patient by ID
 url: "{{base_url}}/Patient/{{patient_id}}"
 method: GET
 scripts:
+  - type: beforeRequest
+    code: ""
+    language: text/javascript
   - type: afterResponse
-    code: "pm.test(\"Check if response status code is 200\", function () {\r
+    code: "pm.test(\"Response is JSON\", function () {\r
 
-      \    pm.response.to.have.status(200);\r
+      \    pm.response.to.be.json;\r
 
       });\r
 
@@ -36,15 +38,17 @@ scripts:
 
       \r
 
-      pm.test(\"Patient contains a name field\", function () {\r
+      pm.test(\"Returned patient matches requested patient\", function () {\r
 
       \    const jsonData = pm.response.json();\r
 
       \r
 
-      \    pm.expect(jsonData.name).to.exist;\r
+      \    pm.expect(jsonData.id)\r
+
+      \        .to.eql(pm.collectionVariables.get(\"patient_id\"));\r
 
       });"
     language: text/javascript
 settings: {}
-order: 4000
+order: 3000

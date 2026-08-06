@@ -1,5 +1,4 @@
 $kind: http-request
-name: Invalid Patient ID Returns 404
 url: "{{base_url}}/Patient/fakeID"
 method: GET
 scripts:

@@ -1,5 +1,4 @@
 $kind: http-request
-name: Empty Results Validation
 url: "{{base_url}}/MedicationRequest?patient=sindhu-syn-000002"
 method: GET
 queryParams:
