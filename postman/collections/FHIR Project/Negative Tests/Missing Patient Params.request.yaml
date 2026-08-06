@@ -1,4 +1,6 @@
 $kind: http-request
+name: Missing Patient Params
+description: Verifies that the Observation endpoint is properly handled when it receives requests with no search parameters.
 url: "{{base_url}}/Observation"
 method: GET
 scripts:

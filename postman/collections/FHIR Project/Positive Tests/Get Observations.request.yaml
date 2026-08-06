@@ -1,5 +1,6 @@
 $kind: http-request
 name: Get Observations
+description: Retrieves Observation data by Patient ID, and ensures integrity across resources.
 url: "{{base_url}}/Observation?patient={{patient_id}}"
 method: GET
 queryParams:

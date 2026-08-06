@@ -1,6 +1,6 @@
 $kind: http-request
 name: Get Patients - Validate Bundle Response
-description: Retrieves a list of all Patient Resources from the FHIR server and validates the response.
+description: Retrieves a list of all Patient Resources from the HAPI FHIR R4 server and validates the response data is a valid FHIR Bundle.
 url: "{{base_url}}/Patient"
 method: GET
 scripts:

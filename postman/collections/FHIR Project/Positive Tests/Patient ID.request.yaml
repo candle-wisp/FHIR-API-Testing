@@ -1,4 +1,6 @@
 $kind: http-request
+name: Patient ID
+description: Pulls a patient resource and stores the ID for use as a variable in downstream requests. Validates the data is successfully returned.
 url: "{{base_url}}/Patient/{{patient_id}}"
 method: GET
 scripts:

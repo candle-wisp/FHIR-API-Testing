@@ -1,4 +1,6 @@
 $kind: http-request
+name: Invalid Patient ID
+description: Verifies proper handling when invalid Patient ID is used.
 url: "{{base_url}}/Patient/fakeID"
 method: GET
 scripts:

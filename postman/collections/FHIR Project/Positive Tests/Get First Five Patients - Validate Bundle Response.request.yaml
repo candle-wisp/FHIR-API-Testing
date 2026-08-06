@@ -1,5 +1,6 @@
 $kind: http-request
 name: Get First Five Patients - Validate Bundle Response
+description: Pulls the first five patients, then validates that the returned data is in the FHIR Bundle format.
 url: "{{base_url}}/Patient?_count=5"
 method: GET
 queryParams:
