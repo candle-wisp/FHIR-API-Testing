@@ -1,0 +1,26 @@
+name: FHIR API Test Suite
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Postman CLI
+        uses: postmanlabs/postman-cli-action@v1
+
+      - name: Run FHIR API tests
+        run: |
+          postman collection run "postman/collections/FHIR Project" \
+            --env-var base_url=https://hapi.fhir.org/baseR4
